@@ -3,6 +3,9 @@ on: [push]
 jobs:
   build:
     runs-on: windows-latest
+    defaults:
+      run:
+        shell: powershell
     steps:
       - name: Baixar arquivos do repositorio
         uses: actions/checkout@v4.2.2
@@ -11,23 +14,19 @@ jobs:
         run: |
           tar -xf natives.zip
 
-      - name: Baixar e Instalar RE-PAK Tool
-        uses: suisei-cn/actions-download-file@v1.6.0
-        with:
-          url: https://github.com
-          target: .
-          filename: repak.zip
+      - name: Baixar RE-PAK Tool
+        run: |
+          curl -L -o repak.zip https://github.com
 
       - name: Extrair RE-PAK Tool Garantido
         run: |
-          powershell Expand-Archive -Force -Path repak.zip -DestinationPath REPak_Folder
+          tar -xf repak.zip
 
       - name: Mover Executavel para Raiz
         run: |
-          powershell -Command "Get-ChildItem -Path REPak_Folder -Filter RE-Pak.exe -Recurse | Move-Item -Destination ."
+          Get-ChildItem -Filter RE-Pak.exe -Recurse | Move-Item -Destination . -Force
 
       - name: Criar o arquivo PAK do Mod
-        shell: cmd
         run: |
           .\RE-Pak.exe pack natives re_chunk_000.pak.patch_001.pak
 
