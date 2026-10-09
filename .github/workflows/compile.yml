@@ -22,9 +22,14 @@ jobs:
         run: |
           powershell Expand-Archive -Force -Path repak.zip -DestinationPath REPak_Folder
 
-      - name: Criar o arquivo PAK do Mod
+      - name: Mover Executavel para Raiz
         run: |
-          powershell -Command "Subst-Service; $exe = (Get-ChildItem -Path REPak_Folder -Filter RE-Pak.exe -Recurse).FullName; & $exe pack natives re_chunk_000.pak.patch_001.pak"
+          powershell -Command "Get-ChildItem -Path REPak_Folder -Filter RE-Pak.exe -Recurse | Move-Item -Destination ."
+
+      - name: Criar o arquivo PAK do Mod
+        shell: cmd
+        run: |
+          RE-Pak.exe pack natives re_chunk_000.pak.patch_001.pak
 
       - name: Disponibilizar para Download
         uses: actions/upload-artifact@v4
