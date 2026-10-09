@@ -29,7 +29,7 @@ jobs:
       - name: Criar o arquivo PAK do Mod
         shell: cmd
         run: |
-          RE-Pak.exe pack natives re_chunk_000.pak.patch_001.pak
+          .\RE-Pak.exe pack natives re_chunk_000.pak.patch_001.pak
 
       - name: Disponibilizar para Download
         uses: actions/upload-artifact@v4
