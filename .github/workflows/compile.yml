@@ -14,7 +14,7 @@ jobs:
       - name: Baixar RE-PAK Tool
         run: |
           curl -L -o repak.zip https://github.com
-          tar -xf repak.zip
+          powershell Expand-Archive -Path repak.zip -DestinationPath .
 
       - name: Criar o arquivo PAK do Mod
         run: |
