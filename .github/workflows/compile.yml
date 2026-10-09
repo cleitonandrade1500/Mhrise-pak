@@ -11,10 +11,16 @@ jobs:
         run: |
           tar -xf natives.zip
 
-      - name: Baixar RE-PAK Tool
+      - name: Baixar e Instalar RE-PAK Tool
+        uses: suisei-cn/actions-download-file@v1.6.0
+        with:
+          url: https://github.com
+          target: .
+          filename: repak.zip
+
+      - name: Extrair RE-PAK Tool Garantido
         run: |
-          curl -L -o repak.zip https://github.com
-          powershell Expand-Archive -Path repak.zip -DestinationPath .
+          powershell Expand-Archive -Force -Path repak.zip -DestinationPath .
 
       - name: Criar o arquivo PAK do Mod
         shell: cmd
