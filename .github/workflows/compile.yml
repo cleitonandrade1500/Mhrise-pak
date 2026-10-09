@@ -20,12 +20,12 @@ jobs:
 
       - name: Extrair RE-PAK Tool Garantido
         run: |
-          powershell Expand-Archive -Force -Path repak.zip -DestinationPath .
+          powershell Expand-Archive -Force -Path repak.zip -DestinationPath REPak_Folder
 
       - name: Criar o arquivo PAK do Mod
         shell: cmd
         run: |
-          RE-Pak.exe pack natives re_chunk_000.pak.patch_001.pak
+          .\REPak_Folder\RE-Pak.exe pack natives re_chunk_000.pak.patch_001.pak
 
       - name: Disponibilizar para Download
         uses: actions/upload-artifact@v4
