@@ -22,10 +22,15 @@ jobs:
         run: |
           powershell Expand-Archive -Force -Path repak.zip -DestinationPath REPak_Folder
 
+      - name: Listar arquivos para checagem
+        shell: cmd
+        run: |
+          dir REPak_Folder
+
       - name: Criar o arquivo PAK do Mod
         shell: cmd
         run: |
-          .\REPak_Folder\RE-Pak.exe pack natives re_chunk_000.pak.patch_001.pak
+          REPak_Folder\RE-Pak.exe pack natives re_chunk_000.pak.patch_001.pak
 
       - name: Disponibilizar para Download
         uses: actions/upload-artifact@v4
