@@ -16,11 +16,11 @@ jobs:
 
       - name: Baixar RE-PAK Tool
         run: |
-          curl -L -o repak.zip https://github.com
+          curl -L -o FIXED-Release.5.3.RE-PAK.zip https://github.com/Backporter/RE-PAK/releases/download/5.3/FIXED-Release.5.3.RE-PAK.zip
 
       - name: Extrair RE-PAK Tool Garantido
         run: |
-          tar -xf repak.zip
+          tar -xf FIXED-Release.5.3.RE-PAK.zip
 
       - name: Mover Executavel para Raiz
         run: |
